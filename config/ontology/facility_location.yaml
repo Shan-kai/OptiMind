@@ -1,0 +1,113 @@
+problem_type: facility_location
+description: 'Capacitated facility location: choose which facilities to open and assign each customer to exactly one open
+  facility, minimizing total fixed + transportation cost while respecting facility capacities.'
+sets:
+  I: set of customers / demand points
+  J: set of candidate facility locations
+parameters:
+  d_i: demand of customer i
+  f_j: fixed cost of opening facility j
+  c_ij: transportation cost from facility j to customer i
+  Q_j: capacity of facility j
+variables:
+- name: x_ij
+  kind: binary
+  description: 1 if customer i is served by facility j, else 0
+  indices:
+  - I
+  - J
+- name: y_j
+  kind: binary
+  description: 1 if facility j is opened, else 0
+  indices:
+  - J
+constraints:
+- name: assignment
+  expression: sum_{j in J} x_ij
+  sense: ==
+  rhs: '1'
+  scope: for all i in I
+  description: Each customer is assigned to exactly one facility
+- name: linking
+  expression: x_ij
+  sense: <=
+  rhs: y_j
+  scope: for all i in I, j in J
+  description: Can only assign to an opened facility
+- name: capacity
+  expression: sum_{i in I} d_i * x_ij
+  sense: <=
+  rhs: Q_j
+  scope: for all j in J
+  description: Total demand assigned to facility j cannot exceed its capacity
+objective:
+  sense: minimize
+  expression: sum_{j in J} f_j * y_j + sum_{i in I} sum_{j in J} c_ij * d_i * x_ij
+  description: Minimize total fixed + transportation cost
+tags:
+- location
+- assignment
+- binary
+- milp
+signature:
+  index_roles:
+  - customer_key
+  - facility_key
+  required_roles:
+  - customer_key
+  - facility_key
+  - demand
+  - capacity
+  - fixed_cost
+  - cost
+  required_parameters:
+  - d_i
+  - Q_j
+  - f_j
+  - c_ij
+  optional_roles:
+  - distance
+aliases:
+  d:
+  - d_i
+  f:
+  - f_j
+  c:
+  - c_ij
+  Q:
+  - Q_j
+logic_checks:
+  required_variables:
+  - y_j
+  required_constraint_patterns:
+  - assign
+  - once
+  - one
+  - each
+  - demand
+  - supply
+metadata:
+  keyword_aliases:
+    d:
+    - demand
+    - customer_demand
+    - requirement
+    - qty
+    - quantity
+    f:
+    - fixed_cost
+    - opening_cost
+    - setup_cost
+    - fixedcost
+    c:
+    - cost
+    - transport_cost
+    - shipping_cost
+    - logistics_cost
+    - distance
+    - dist
+    - total_fee
+    Q:
+    - capacity
+    - cap
+    - limit

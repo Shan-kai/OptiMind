@@ -1,0 +1,85 @@
+problem_type: transportation
+description: 'Transportation problem: ship goods from multiple sources to multiple destinations minimizing total shipping
+  cost, subject to supply and demand constraints.'
+sets:
+  I: set of sources (suppliers)
+  J: set of destinations (markets)
+parameters:
+  s_i: supply at source i
+  d_j: demand at destination j
+  c_ij: unit shipping cost from source i to destination j
+variables:
+- name: x_ij
+  kind: continuous
+  description: Quantity shipped from source i to destination j
+  indices:
+  - I
+  - J
+  lower_bound: 0.0
+constraints:
+- name: supply
+  expression: sum_{j in J} x_ij
+  sense: <=
+  rhs: s_i
+  scope: for all i in I
+  description: Cannot ship more than available supply
+- name: demand
+  expression: sum_{i in I} x_ij
+  sense: '>='
+  rhs: d_j
+  scope: for all j in J
+  description: Must satisfy demand at each destination
+objective:
+  sense: minimize
+  expression: sum_{i in I} sum_{j in J} c_ij * x_ij
+  description: Minimize total shipping cost
+tags:
+- transportation
+- network
+- continuous
+- lp
+signature:
+  index_roles:
+  - source_key
+  - sink_key
+  required_roles:
+  - source_key
+  - sink_key
+  - supply
+  - demand
+  - cost
+  required_parameters:
+  - s_i
+  - d_j
+  - c_ij
+  optional_roles:
+  - distance
+aliases:
+  s:
+  - s_i
+  d:
+  - d_j
+  c:
+  - c_ij
+logic_checks:
+  required_variables:
+  - x_ij
+  required_constraint_patterns:
+  - supply
+  - demand
+metadata:
+  keyword_aliases:
+    s:
+    - supply
+    - stock
+    - available
+    d:
+    - demand
+    - need
+    - requirement
+    c:
+    - cost
+    - transport_cost
+    - shipping_cost
+    - distance
+    - dist

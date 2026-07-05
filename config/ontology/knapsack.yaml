@@ -1,0 +1,70 @@
+problem_type: knapsack
+description: '0/1 knapsack problem: select items to maximize total value subject to a weight capacity constraint.'
+sets:
+  I: set of items
+parameters:
+  v_i: value of item i
+  w_i: weight of item i
+  C: knapsack capacity
+variables:
+- name: x_i
+  kind: binary
+  description: 1 if item i is selected, else 0
+  indices:
+  - I
+constraints:
+- name: capacity
+  expression: sum_{i in I} w_i * x_i
+  sense: <=
+  rhs: C
+  scope: ''
+  description: Total weight cannot exceed capacity
+objective:
+  sense: maximize
+  expression: sum_{i in I} v_i * x_i
+  description: Maximize total value of selected items
+tags:
+- knapsack
+- binary
+- milp
+- selection
+signature:
+  index_roles:
+  - item
+  required_roles:
+  - value
+  - weight
+  - capacity
+  required_parameters:
+  - v_i
+  - w_i
+  - C
+  optional_roles: []
+aliases:
+  v:
+  - v_i
+  w:
+  - w_i
+  C:
+  - C
+logic_checks:
+  required_variables:
+  - x_i
+  required_constraint_patterns:
+  - cap
+metadata:
+  keyword_aliases:
+    v:
+    - value
+    - profit
+    - benefit
+    - price
+    - revenue
+    w:
+    - weight
+    - mass
+    - size
+    C:
+    - capacity
+    - cap
+    - limit

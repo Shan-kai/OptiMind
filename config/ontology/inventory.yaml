@@ -1,0 +1,117 @@
+problem_type: inventory
+description: 'Multi-period inventory optimization: determine order quantities over a planning horizon to meet demand while
+  minimizing total ordering, holding, and shortage costs.'
+sets:
+  T: set of time periods
+  I: set of items (products)
+parameters:
+  d_it: demand for item i in period t
+  h_i: holding cost per unit of item i per period
+  s_i: ordering cost for item i
+  c_i: unit purchase cost for item i
+  I0_i: initial inventory of item i
+  M: big-M for order-placement linking constraint
+variables:
+- name: x_it
+  kind: continuous
+  description: Order quantity of item i in period t
+  indices:
+  - I
+  - T
+  lower_bound: 0.0
+- name: y_it
+  kind: binary
+  description: 1 if order placed for item i in period t, else 0
+  indices:
+  - I
+  - T
+- name: I_it
+  kind: continuous
+  description: Inventory level of item i at end of period t
+  indices:
+  - I
+  - T
+  lower_bound: 0.0
+constraints:
+- name: balance
+  expression: I_it
+  sense: ==
+  rhs: I_i(t-1) + x_it - d_it
+  scope: for all i in I, t in T
+  description: Inventory balance equation
+- name: linking
+  expression: x_it
+  sense: <=
+  rhs: M * y_it
+  scope: for all i in I, t in T
+  description: Can only order if order is placed (big-M constraint)
+objective:
+  sense: minimize
+  expression: sum_{i in I} sum_{t in T} c_i * x_it + sum_{i in I} sum_{t in T} s_i * y_it + sum_{i in I} sum_{t in T} h_i
+    * I_it
+  description: Minimize total ordering, holding, and purchase costs
+tags:
+- inventory
+- multi-period
+- milp
+- planning
+signature:
+  index_roles:
+  - item
+  - period
+  required_roles:
+  - demand
+  - holding_cost
+  - ordering_cost
+  - purchase_cost
+  required_parameters:
+  - d_it
+  - h_i
+  - s_i
+  - c_i
+  optional_roles:
+  - initial_inventory
+  auto_computed_parameters:
+  - M
+aliases:
+  d:
+  - d_it
+  h:
+  - h_i
+  s:
+  - s_i
+  c:
+  - c_i
+  I0:
+  - I0_i
+logic_checks:
+  required_variables:
+  - x_it
+  - y_it
+  - I_it
+  required_constraint_patterns:
+  - balance
+  - linking
+metadata:
+  keyword_aliases:
+    d:
+    - demand
+    - qty
+    - quantity
+    - requirement
+    h:
+    - holding_cost
+    - storage_cost
+    - carrying_cost
+    s:
+    - ordering_cost
+    - setup_cost
+    - fixed_cost
+    c:
+    - purchase_cost
+    - unit_cost
+    - cost
+    I0:
+    - initial_inventory
+    - opening_inventory
+    - starting_inventory

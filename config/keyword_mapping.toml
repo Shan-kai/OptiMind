@@ -1,0 +1,387 @@
+# Column keyword → optimization semantics.
+# This is the single source of truth for heuristic schema interpretation
+# and instance building. All keyword lookups are case-insensitive.
+
+[keywords.demand]
+semantic_role = "demand"
+optimization_symbol = "d_i"
+canonical_role = "demand"
+is_index = false
+
+[keywords.qty]
+semantic_role = "demand"
+optimization_symbol = "d_i"
+canonical_role = "demand"
+is_index = false
+
+[keywords.quantity]
+semantic_role = "demand"
+optimization_symbol = "d_i"
+canonical_role = "demand"
+is_index = false
+
+[keywords."需求量"]
+semantic_role = "demand"
+optimization_symbol = "d_i"
+canonical_role = "demand"
+is_index = false
+
+[keywords.capacity]
+semantic_role = "capacity"
+optimization_symbol = "Q_j"
+canonical_role = "capacity"
+is_index = false
+
+[keywords.cap]
+semantic_role = "capacity"
+optimization_symbol = "Q_j"
+canonical_role = "capacity"
+is_index = false
+
+[keywords."产能"]
+semantic_role = "capacity"
+optimization_symbol = "Q_j"
+canonical_role = "capacity"
+is_index = false
+
+[keywords."容量"]
+semantic_role = "capacity"
+optimization_symbol = "Q_j"
+canonical_role = "capacity"
+is_index = false
+
+[keywords.fixed_cost]
+semantic_role = "fixed_cost"
+optimization_symbol = "f_j"
+canonical_role = "fixed_cost"
+is_index = false
+
+[keywords.fixedcost]
+semantic_role = "fixed_cost"
+optimization_symbol = "f_j"
+canonical_role = "fixed_cost"
+is_index = false
+
+[keywords."固定成本"]
+semantic_role = "fixed_cost"
+optimization_symbol = "f_j"
+canonical_role = "fixed_cost"
+is_index = false
+
+[keywords."固定费用"]
+semantic_role = "fixed_cost"
+optimization_symbol = "f_j"
+canonical_role = "fixed_cost"
+is_index = false
+
+[keywords."开店成本"]
+semantic_role = "fixed_cost"
+optimization_symbol = "f_j"
+canonical_role = "fixed_cost"
+is_index = false
+
+[keywords.cost]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords.distance]
+semantic_role = "distance"
+optimization_symbol = "c_ij"
+canonical_role = "distance"
+is_index = false
+
+[keywords.dist]
+semantic_role = "distance"
+optimization_symbol = "c_ij"
+canonical_role = "distance"
+is_index = false
+
+[keywords.total_fee]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords.fee]
+semantic_role = "fixed_cost"
+optimization_symbol = "f_j"
+canonical_role = "fixed_cost"
+is_index = false
+
+[keywords.transport_cost]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords.shipping_cost]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords."运输费用"]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords."运输成本"]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords."运费"]
+semantic_role = "cost"
+optimization_symbol = "c_ij"
+canonical_role = "cost"
+is_index = false
+
+[keywords.value]
+semantic_role = "value"
+optimization_symbol = "v_i"
+canonical_role = "value"
+is_index = false
+
+[keywords.profit]
+semantic_role = "value"
+optimization_symbol = "v_i"
+canonical_role = "value"
+is_index = false
+
+[keywords.benefit]
+semantic_role = "value"
+optimization_symbol = "v_i"
+canonical_role = "value"
+is_index = false
+
+[keywords.price]
+semantic_role = "value"
+optimization_symbol = "v_i"
+canonical_role = "value"
+is_index = false
+
+[keywords.revenue]
+semantic_role = "value"
+optimization_symbol = "v_i"
+canonical_role = "value"
+is_index = false
+
+[keywords.weight]
+semantic_role = "weight"
+optimization_symbol = "w_i"
+canonical_role = "weight"
+is_index = false
+
+[keywords.mass]
+semantic_role = "weight"
+optimization_symbol = "w_i"
+canonical_role = "weight"
+is_index = false
+
+[keywords.size]
+semantic_role = "weight"
+optimization_symbol = "w_i"
+canonical_role = "weight"
+is_index = false
+
+[keywords.processing_time]
+semantic_role = "processing_time"
+optimization_symbol = "p_j"
+canonical_role = "processing_time"
+is_index = false
+
+[keywords.duration]
+semantic_role = "processing_time"
+optimization_symbol = "p_j"
+canonical_role = "processing_time"
+is_index = false
+
+[keywords.time]
+semantic_role = "processing_time"
+optimization_symbol = "p_j"
+canonical_role = "processing_time"
+is_index = false
+
+[keywords.due_date]
+semantic_role = "due_date"
+optimization_symbol = "d_j"
+canonical_role = "due_date"
+is_index = false
+
+[keywords.deadline]
+semantic_role = "due_date"
+optimization_symbol = "d_j"
+canonical_role = "due_date"
+is_index = false
+
+[keywords.holding_cost]
+semantic_role = "holding_cost"
+optimization_symbol = "h_i"
+canonical_role = "holding_cost"
+is_index = false
+
+[keywords.storage_cost]
+semantic_role = "holding_cost"
+optimization_symbol = "h_i"
+canonical_role = "holding_cost"
+is_index = false
+
+[keywords.ordering_cost]
+semantic_role = "ordering_cost"
+optimization_symbol = "s_i"
+canonical_role = "ordering_cost"
+is_index = false
+
+[keywords.setup_cost]
+semantic_role = "ordering_cost"
+optimization_symbol = "s_i"
+canonical_role = "ordering_cost"
+is_index = false
+
+[keywords.purchase_cost]
+semantic_role = "purchase_cost"
+optimization_symbol = "c_i"
+canonical_role = "purchase_cost"
+is_index = false
+
+[keywords.initial_inventory]
+semantic_role = "initial_inventory"
+optimization_symbol = "I0_i"
+canonical_role = "initial_inventory"
+is_index = false
+
+[keywords.balance]
+semantic_role = "balance"
+optimization_symbol = "b_i"
+canonical_role = "balance"
+is_index = false
+
+[keywords.net]
+semantic_role = "balance"
+optimization_symbol = "b_i"
+canonical_role = "balance"
+is_index = false
+
+[keywords.flow]
+semantic_role = "balance"
+optimization_symbol = "b_i"
+canonical_role = "balance"
+is_index = false
+
+[keywords.lat]
+semantic_role = "latitude"
+optimization_symbol = "y_j"
+canonical_role = "other"
+is_index = false
+
+[keywords.latitude]
+semantic_role = "latitude"
+optimization_symbol = "y_j"
+canonical_role = "other"
+is_index = false
+
+[keywords.lon]
+semantic_role = "longitude"
+optimization_symbol = "x_j"
+canonical_role = "other"
+is_index = false
+
+[keywords.longitude]
+semantic_role = "longitude"
+optimization_symbol = "x_j"
+canonical_role = "other"
+is_index = false
+
+[keywords.lng]
+semantic_role = "longitude"
+optimization_symbol = "x_j"
+canonical_role = "other"
+is_index = false
+
+[keywords.id]
+semantic_role = "id"
+is_index = true
+
+[keywords.name]
+semantic_role = "name"
+is_index = true
+
+[keywords.node]
+semantic_role = "node"
+is_index = true
+
+[keywords.facility]
+semantic_role = "facility"
+canonical_role = "facility_key"
+is_index = true
+
+[keywords."工厂"]
+semantic_role = "facility"
+canonical_role = "facility_key"
+is_index = true
+
+[keywords.customer]
+semantic_role = "customer"
+canonical_role = "customer_key"
+is_index = true
+
+[keywords."客户"]
+semantic_role = "customer"
+canonical_role = "customer_key"
+is_index = true
+
+[keywords.client]
+semantic_role = "customer"
+canonical_role = "customer_key"
+is_index = true
+
+[keywords.warehouse]
+semantic_role = "facility"
+canonical_role = "facility_key"
+is_index = true
+
+[keywords.agent]
+semantic_role = "agent"
+canonical_role = "agent_key"
+is_index = true
+
+[keywords.task]
+semantic_role = "task"
+canonical_role = "task_key"
+is_index = true
+
+[keywords.source]
+semantic_role = "source"
+canonical_role = "source_key"
+is_index = true
+
+[keywords.sink]
+semantic_role = "sink"
+canonical_role = "sink_key"
+is_index = true
+
+[keywords.item]
+semantic_role = "item"
+is_index = true
+
+[keywords.product]
+semantic_role = "item"
+is_index = true
+
+[keywords.supply]
+semantic_role = "supply"
+optimization_symbol = "s_i"
+canonical_role = "supply"
+is_index = false
+
+[keywords.job]
+semantic_role = "job"
+is_index = true
+
+[keywords.period]
+semantic_role = "period"
+is_index = true

@@ -1,0 +1,13 @@
+# 默认配置。本地覆盖用 config/local.toml（已被 .gitignore 忽略）。
+
+[app]
+env = "local"
+log_level = "INFO"
+
+[llm]
+provider = "openai"
+model = "gpt-4o-mini"
+
+[solver]
+backend = "cplex"
+timeout = 300.0

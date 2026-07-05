@@ -1,0 +1,66 @@
+problem_type: assignment
+description: 'Generalized assignment / rectangular matching: assign at most one task to each agent and at most one agent to each task, minimizing total cost.'
+sets:
+  I: set of agents
+  J: set of tasks
+parameters:
+  c_ij: cost of assigning agent i to task j
+variables:
+- name: x_ij
+  kind: binary
+  description: 1 if agent i is assigned to task j, else 0
+  indices:
+  - I
+  - J
+constraints:
+- name: one_task_per_agent
+  expression: sum_{j in J} x_ij
+  sense: <=
+  rhs: '1'
+  scope: for all i in I
+  description: Each agent is assigned to at most one task
+- name: one_agent_per_task
+  expression: sum_{i in I} x_ij
+  sense: <=
+  rhs: '1'
+  scope: for all j in J
+  description: Each task is assigned to at most one agent
+objective:
+  sense: minimize
+  expression: sum_{i in I} sum_{j in J} c_ij * x_ij
+  description: Minimize total assignment cost
+tags:
+- assignment
+- binary
+- milp
+- matching
+signature:
+  index_roles:
+  - agent_key
+  - task_key
+  required_roles:
+  - agent_key
+  - task_key
+  - cost
+  required_parameters:
+  - c_ij
+  optional_roles: []
+aliases:
+  c:
+  - c_ij
+logic_checks:
+  required_variables:
+  - x_ij
+  required_constraint_patterns:
+  - one_task
+  - one_agent
+  - once
+  - one
+metadata:
+  keyword_aliases:
+    c:
+    - cost
+    - transport_cost
+    - shipping_cost
+    - distance
+    - dist

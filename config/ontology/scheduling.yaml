@@ -1,0 +1,97 @@
+problem_type: scheduling
+description: 'Single-machine scheduling with continuous start/completion times and a big-M disjunctive formulation: minimize total weighted completion time subject to processing times and no overlap.'
+sets:
+  J: set of jobs
+  P: set of unordered job pairs (j,k) with j < k
+parameters:
+  p_j: processing time of job j
+  w_j: weight (priority) of job j
+  M: big-M constant used in disjunctive constraints (sum of all processing times)
+variables:
+- name: S_j
+  kind: continuous
+  description: start time of job j
+  indices:
+  - J
+  lower_bound: 0.0
+- name: C_j
+  kind: continuous
+  description: completion time of job j
+  indices:
+  - J
+  lower_bound: 0.0
+- name: y_jk
+  kind: binary
+  description: 1 if job j is scheduled before job k, else 0
+  indices:
+  - P
+constraints:
+- name: completion
+  expression: C_j - S_j
+  sense: '>='
+  rhs: p_j
+  scope: for all j in J
+  description: Completion time is at least start time plus processing time
+- name: disjunctive_j_before_k
+  expression: S_k - C_j - M * y_jk
+  sense: '>='
+  rhs: '-M'
+  scope: for all (j,k) in P
+  description: If y_jk = 1 then job j completes before job k starts
+- name: disjunctive_k_before_j
+  expression: S_j - C_k + M * y_jk
+  sense: '>='
+  rhs: '0'
+  scope: for all (j,k) in P
+  description: If y_jk = 0 then job k completes before job j starts
+objective:
+  sense: minimize
+  expression: sum_{j in J} w_j * C_j
+  description: Minimize total weighted completion time
+tags:
+- scheduling
+- continuous-time
+- milp
+- disjunctive
+signature:
+  index_roles:
+  - job
+  required_roles:
+  - processing_time
+  - weight
+  required_parameters:
+  - p_j
+  - w_j
+  optional_roles:
+  - due_date
+  auto_computed_parameters:
+  - M
+aliases:
+  p:
+  - p_j
+  w:
+  - w_j
+  d:
+  - d_j
+logic_checks:
+  required_variables:
+  - S_j
+  - C_j
+  - y_jk
+  required_constraint_patterns:
+  - completion
+  - disjunctive
+metadata:
+  keyword_aliases:
+    p:
+    - processing_time
+    - processing
+    - duration
+    - time
+    d:
+    - due_date
+    - deadline
+    w:
+    - weight
+    - priority
+    - importance

@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Env / secrets
+.env
+.env.local
+config/local.*
+
+# Runtime data / sessions
+sessions/
+uploads/
+.temp_uploads/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS
+Thumbs.db
+.DS_Store

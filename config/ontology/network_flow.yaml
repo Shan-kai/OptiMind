@@ -1,0 +1,82 @@
+problem_type: network_flow
+description: 'Minimum cost network flow: route flow through a network from sources to sinks minimizing total cost, subject
+  to capacity and flow conservation constraints.'
+sets:
+  N: set of nodes
+  A: set of arcs (edges)
+  S: set of source nodes (subset of N)
+  T: set of sink nodes (subset of N)
+parameters:
+  c_ij: unit cost on arc (i,j)
+  u_ij: capacity of arc (i,j)
+  b_i: supply (positive) or demand (negative) at node i
+variables:
+- name: x_ij
+  kind: continuous
+  description: Flow on arc (i,j)
+  indices:
+  - A
+  lower_bound: 0.0
+constraints:
+- name: capacity
+  expression: x_ij
+  sense: <=
+  rhs: u_ij
+  scope: for all (i,j) in A
+  description: Flow on each arc cannot exceed capacity
+- name: conservation
+  expression: 'sum_{j: (i,j) in A} x_ij - sum_{j: (j,i) in A} x_ji'
+  sense: ==
+  rhs: b_i
+  scope: for all i in N
+  description: Flow conservation at each node
+objective:
+  sense: minimize
+  expression: sum_{(i,j) in A} c_ij * x_ij
+  description: Minimize total flow cost
+tags:
+- network
+- flow
+- continuous
+- lp
+- routing
+signature:
+  index_roles:
+  - node
+  required_roles:
+  - cost
+  - capacity
+  - balance
+  required_parameters:
+  - c_ij
+  - u_ij
+  - b_i
+  optional_roles: []
+aliases:
+  c:
+  - c_ij
+  u:
+  - u_ij
+  b:
+  - b_i
+logic_checks:
+  required_variables:
+  - x_ij
+  required_constraint_patterns:
+  - capacity
+  - conservation
+metadata:
+  keyword_aliases:
+    c:
+    - cost
+    - distance
+    - dist
+    u:
+    - capacity
+    - upper
+    - limit
+    - max
+    b:
+    - balance
+    - net
+    - flow
