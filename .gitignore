@@ -33,3 +33,12 @@ frontend/dist/
 # OS
 Thumbs.db
 .DS_Store
+
+# Editor / runtime locks
+.vscode/
+.claude/
+*.lock
+
+# Stray pip output
+=1.5.0
+
